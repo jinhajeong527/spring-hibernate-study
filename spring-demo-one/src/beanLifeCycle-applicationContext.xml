@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    
+    <!-- 
+		Add a logger config to see logging messages.		
+		- For more detailed logs, set values to "FINEST"
+		- For info on logging levels, see: http://www.vogella.com/tutorials/Logging/article.html
+	 -->
+    <bean id="myLoggerConfig" class="com.jjh.springdemo.MyLoggerConfig" init-method="initLogger">
+    	<property name="rootLoggerLevel" value="FINE" />
+    	<property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+    
+    <!-- Bean custom processor to handle calling destroy methods on prototype scoped beans -->
+    <bean id="customProcessor"
+    		class="com.jjh.springdemo.MyCustomBeanProcessor">
+   	</bean>
+
+    <!-- Define your beans here -->
+    <bean id="myFortuneService"
+		  class="com.jjh.springdemo.HappyFortuneService">
+	</bean>
+	<bean id="myGreatFortuneService"
+		  class="com.jjh.springdemo.GreatFortuneService">
+	</bean> 
+	    
+    <!-- 스프링은 Coach 오브젝트를 생성하고, 생성자를 부른 다음에, Fortune reference(myFortune,HappyFortuneService) 를 넘겨줄 것이다. -->
+    <bean id="myCoach"
+		  class="com.jjh.springdemo.TrackCoach"
+		  init-method="doMyStartupStuff"
+		  destroy-method="doMyCleanupStuff"
+		  >
+		  <!-- 생성자를 통한 의존성 주입 설정 -->
+		  <constructor-arg ref="myFortuneService" /><!-- 의존성 주입할 bean의 id를 적어준다. -->
+	</bean>
+	
+	
+    
+</beans>
+
+
+
+
+
