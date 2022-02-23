@@ -7,8 +7,6 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <!-- sport.properties 로드한다. config file for config file-->
-    <context:property-placeholder location="classpath:sport.properties" />
     
     <!-- 
 		Add a logger config to see logging messages.		
@@ -26,24 +24,17 @@
 	</bean>
 	<bean id="myGreatFortuneService"
 		  class="com.jjh.springdemo.GreatFortuneService">
-	</bean>     
+	</bean> 
+	    
     <!-- 스프링은 Coach 오브젝트를 생성하고, 생성자를 부른 다음에, Fortune reference(myFortune,HappyFortuneService) 를 넘겨줄 것이다. -->
     <bean id="myCoach"
-		  class="com.jjh.springdemo.TrackCoach">
+		  class="com.jjh.springdemo.TrackCoach"
+		  scope="prototype">
 		  <!-- 생성자를 통한 의존성 주입 설정 -->
 		  <constructor-arg ref="myFortuneService" /><!-- 의존성 주입할 bean의 id를 적어준다. -->
 	</bean>
 	
-	<bean id="myCricketCoach"
-		class="com.jjh.springdemo.CricketCoach">
-		<!-- setter를 통한 의존성 주입 설정 -->
-		<property name="fortuneService" ref="myGreatFortuneService" /><!-- 의존성 주입할 bean의 id를 적어준다. -->
-		<!-- name은 setter메서드 호출하기 위해 필요하다. 앞문자만 대문자로 바꾸고 set붙인 메서드를 호출할 것이다. -->
-		<!-- leteral values 주입한다. -->
-		<!-- 우리가 이 속성들 사용하려고 할때, setter 메서드를 호출할 것이고, property의 name에 기반하여 setter 메서드를 호출한다.-->
-		<property name="emailAddress" value="${foo.email}" /> 
-		<property name="team" value="${foo.team}" /> 
-	</bean>
+	
     
 </beans>
 
