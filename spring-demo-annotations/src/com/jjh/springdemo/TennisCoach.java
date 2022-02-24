@@ -1,7 +1,11 @@
 package com.jjh.springdemo;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 //스프링이 클래스 스캔할 때 사용할 어노테이션
@@ -9,12 +13,24 @@ import org.springframework.stereotype.Component;
 public class TennisCoach implements Coach {
 	
 	@Autowired
-	@Qualifier("greatFortuneService")
+	@Qualifier("fileFortuneService")
 	FortuneService fortuneService;
 	
 	//기본 생성자 설정하기(tracing 목적)
 	public TennisCoach() {
 		System.out.println(">> TennisCoach 기본 생성자 안 ");
+	}
+	
+	//init 메서드
+	@PostConstruct
+	public void init() {
+		System.out.println(">> TennisCoach init method 안");
+	} 
+	
+	//destroy 메서드
+	@PreDestroy
+	public void destroy() {
+		System.out.println(">> TennisCoach destroy method 안");
 	}
 	
 	/*
