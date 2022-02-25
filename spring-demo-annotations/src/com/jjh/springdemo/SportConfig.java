@@ -3,9 +3,11 @@ package com.jjh.springdemo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-//@ComponentScan("com.jjh.springdemo")//스캔할 패키지 이름 적어준다.
+@ComponentScan("com.jjh.springdemo")//스캔할 패키지 이름 적어준다.
+//@PropertySource("classpath:sport.properties")
 public class SportConfig {
 	
 	//sad fortune service 정의
