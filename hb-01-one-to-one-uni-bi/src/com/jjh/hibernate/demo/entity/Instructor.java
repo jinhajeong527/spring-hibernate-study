@@ -1,5 +1,8 @@
 package com.jjh.hibernate.demo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,6 +37,10 @@ public class Instructor {
 	//instructor_detail_id는 Instructor 테이블에 정의되어 있다. 이 외부키는 instructor_detail 테이블의 id 필드를 참조한다.
 	@JoinColumn(name="instructor_detail_id")
 	private InstructorDetail instructorDetail;
+
+	@OneToMany(mappedBy="instructor", cascade = {CascadeType.PERSIST, CascadeType.DETACH, 
+			  						  CascadeType.MERGE, CascadeType.REFRESH})
+	private List<Course> courses;
 	
 	public Instructor() {
 	}
@@ -81,6 +89,26 @@ public class Instructor {
 
 	public void setInstructorDetail(InstructorDetail instructorDetail) {
 		this.instructorDetail = instructorDetail;
+	}
+	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+	
+	public void add(Course course) {
+		
+		if(courses == null) {
+			courses = new ArrayList<>();
+		}
+		
+		courses.add(course);
+		
+		course.setInstructor(this);
+		
 	}
 
 	@Override

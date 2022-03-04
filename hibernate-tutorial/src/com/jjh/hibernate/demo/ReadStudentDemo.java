@@ -1,5 +1,7 @@
 package com.jjh.hibernate.demo;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,7 +12,7 @@ import com.jjh.hibernate.demo.entity.Student;
 
 public class ReadStudentDemo {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		//session factory 만들기
 		SessionFactory factory = new Configuration()
@@ -24,7 +26,9 @@ public class ReadStudentDemo {
 		try {
 			// db에 자바 오브젝트 저장하기 위해 session 사용하기
 			// student 오브젝트 만들기
-			Student tempStudent = new Student("Yerin", "Lee", "yrLee@luv2code.com");
+			String dateOfBirth = "31/12/1998";
+			Date theDateOfBirth = DateUtils.parseDate(dateOfBirth);
+			Student tempStudent = new Student("Sooyeon", "Yoon", "syYoon@luv2code.com", theDateOfBirth);
 			System.out.println("save() 전 "+tempStudent);
 			// 트랜잭션 시작
 			session.beginTransaction();

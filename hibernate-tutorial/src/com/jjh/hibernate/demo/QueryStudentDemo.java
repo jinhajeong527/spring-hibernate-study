@@ -29,9 +29,24 @@ public class QueryStudentDemo {
 			List<Student> students = session.createQuery("from Student").getResultList();
 			
 			//student 리스트 콘솔에 출력해보기
-			for(Student student: students) {
-				System.out.println(student);
-			}
+			displayStudents(students);
+			
+			//조건문 where 사용
+			students = session.createQuery("from Student s where s.firstName='Yerin'").getResultList();
+			displayStudents(students);
+			
+			//OR 사용
+			students = session.createQuery("from Student s where"
+								+ " s.firstName='Yerin' OR s.lastName='Kim'").getResultList();
+			displayStudents(students);
+			
+			//LIKE 사용
+			students = session.createQuery("from Student s where"
+								+ " s.email LIKE '%luv2code.com'").getResultList();
+			System.out.println("이메일이 luv2code.com 인 학생 리스트");
+			displayStudents(students);
+			
+			
 			
 			//트랜잭션 커밋하기
 			session.getTransaction().commit();
@@ -40,6 +55,12 @@ public class QueryStudentDemo {
 		}
 		finally {
 			factory.close();
+		}
+	}
+
+	private static void displayStudents(List<Student> students) {
+		for(Student student: students) {
+			System.out.println(student);
 		}
 	}
 
