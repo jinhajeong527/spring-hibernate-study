@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,12 +35,15 @@ public class Instructor {
 	
 	//모든 operation에 적용되는 관계가 된다.(persisting, deleting, updating..)
 	@OneToOne(cascade=CascadeType.ALL) 
+	
 	//instructor_detail_id는 Instructor 테이블에 정의되어 있다. 이 외부키는 instructor_detail 테이블의 id 필드를 참조한다.
 	@JoinColumn(name="instructor_detail_id")
 	private InstructorDetail instructorDetail;
 
-	@OneToMany(mappedBy="instructor", cascade = {CascadeType.PERSIST, CascadeType.DETACH, 
-			  						  CascadeType.MERGE, CascadeType.REFRESH})
+	@OneToMany(fetch = FetchType.LAZY,
+			   mappedBy="instructor", 
+			   cascade = { CascadeType.PERSIST, CascadeType.DETACH, 
+					      CascadeType.MERGE, CascadeType.REFRESH })
 	private List<Course> courses;
 	
 	public Instructor() {
