@@ -34,9 +34,8 @@ public class Instructor {
 	private String email;
 	
 	//모든 operation에 적용되는 관계가 된다.(persisting, deleting, updating..)
-	@OneToOne(cascade=CascadeType.ALL) 
-	
 	//instructor_detail_id는 Instructor 테이블에 정의되어 있다. 이 외부키는 instructor_detail 테이블의 id 필드를 참조한다.
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="instructor_detail_id")
 	private InstructorDetail instructorDetail;
 
