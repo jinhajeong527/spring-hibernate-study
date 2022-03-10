@@ -40,7 +40,50 @@ public class CustomerDAOImpl implements CustomerDAO {
 		//커렌트 하이버네이트 세션 얻는다
 		Session currentSession = sessionFactory.getCurrentSession();
 		//고객 정보 저장한다.
-		currentSession.save(customer);
+		currentSession.saveOrUpdate(customer);
+	}
+	@Override
+	public Customer getCustomer(int id) {
+		//커렌트 하이버네이트 세션 얻는다
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//primary key 사용해서 database에서 해당 Customer 정보 얻어온다.
+		Customer customer = currentSession.get(Customer.class, id);
+		
+		return customer;
+	}
+	@Override
+	public void deleteCustomer(int id) {
+		
+		//커렌트 하이버네이트 세션 얻는다
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//primary key 사용해서 Customer 오브젝트 지우기
+		Query theQuery = currentSession.createQuery("delete from Customer where id=:customerId");
+		theQuery.setParameter("customerId", id);
+		//어떤 HQL이든 그것에 맞춰서 update 해줌. general purpose
+		theQuery.executeUpdate();
+	}
+	@Override
+	public List<Customer> searchCustomers(String searchName) {
+		//커렌트 하이버네이트 세션 얻는다
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query theQuery = null;
+		//
+        // only search by name if theSearchName is not empty
+        //
+        if (searchName != null && searchName.trim().length() > 0) {
+            // search for firstName or lastName ... case insensitive
+            theQuery =currentSession.createQuery("from Customer where lower(firstName) like :searchName or lower(lastName) like :searchName", Customer.class);
+            theQuery.setParameter("searchName", "%" + searchName.toLowerCase() + "%");
+        }
+        else {
+            // theSearchName is empty ... so just get all customers
+            theQuery =currentSession.createQuery("from Customer", Customer.class);            
+        }
+        // execute query and get result list
+        List<Customer> customers = theQuery.getResultList();
+		return customers;
 	}
 
 }

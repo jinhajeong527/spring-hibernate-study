@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jjh.springdemo.entity.Customer;
 import com.jjh.springdemo.service.CustomerService;
@@ -36,7 +37,7 @@ public class CustomerController {
 	public String showFormForAdd(Model model) {
 		//폼 데이터 바인딩을 위한 모델 어트리뷰트 만들기
 		Customer theCustomer = new Customer();
-		model.addAttribute("customer", theCustomer);
+		model.addAttribute("customer", theCustomer);//customer-form.jsp form의 modelAttribute와 값 일치함.
 		return "customer-form";
 	}
 	
@@ -47,5 +48,38 @@ public class CustomerController {
 		
 		return "redirect:/customer/list";
 	}
+	
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("customerId") int id, Model model) {
+		
+		//get the customer from the service
+		Customer customer = customerService.getCustomer(id);
+		//set customer as a model attribute to pre-populate the form 
+		model.addAttribute("customer", customer);
+		//send over to our form
+		return "customer-form";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteCustomer(@RequestParam("customerId")int id) {
+		//customer 삭제하기
+		customerService.deleteCustomer(id);
+		return "redirect:/customer/list";
+	}
+	
+	//고객 이름으로 검색하기
+	@GetMapping("/search")
+    public String searchCustomers(@RequestParam("searchName") String searchName,
+                                    Model model) {
+        // search customers from the service
+        List<Customer> theCustomers = customerService.searchCustomers(searchName);
+                
+        // add the customers to the model
+        model.addAttribute("customers", theCustomers);
+        return "list-customers";        
+    }
+	
+	
+	
 
 }
