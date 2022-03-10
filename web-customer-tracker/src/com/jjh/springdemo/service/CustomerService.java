@@ -1,13 +1,13 @@
-package com.jjh.springdemo.dao;
+package com.jjh.springdemo.service;
 
 import java.util.List;
 
 import com.jjh.springdemo.entity.Customer;
 
-public interface CustomerDAO {
+public interface CustomerService {
 	
 	public List<Customer> getCustomers();
 
 	public void saveCustomer(Customer customer);
-	
+
 }
