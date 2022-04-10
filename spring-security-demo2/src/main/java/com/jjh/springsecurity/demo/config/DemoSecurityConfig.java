@@ -34,8 +34,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/showMyLoginPage") //커스텀 로그인 페이지 보여주는 리퀘스트 맵핑
 				.loginProcessingUrl("/authenticateTheUser") //로그인 폼의 POST 데이터 프로세싱할 URL
-				.permitAll();// 로그인 할 필요 없이 모든 사람이 로그인 페이지에 접근할 수 있음.
-		
+				.permitAll()// 로그인 할 필요 없이 모든 사람이 로그인 페이지에 접근할 수 있음.
+			.and()
+			.logout().permitAll();//로그아웃 서포트 추가
 	}
 	
 

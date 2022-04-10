@@ -12,9 +12,9 @@ public class MyDemoLoggingAspect {
 	
 	//let's start with an @Before advice
 	
-	@Before("execution(public void addAccount())") //Pointcut expression
+	//@Before("execution(public void com.jjh.aopdemo.dao.AccountDAO.addAccount())") //Pointcut expressionZ
+	@Before("execution(* add*())") //어떤 return 타입이든 매치, add로 시작하는 어떤 메서드든 매치
 	public void beforeAddAccountAdvice() {
-		
 		System.out.println("\n====>>> Executing @Before advice on addAccount()");
 	}
 
