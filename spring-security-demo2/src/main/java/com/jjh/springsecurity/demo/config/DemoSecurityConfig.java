@@ -27,6 +27,8 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {//application, login, logout의 webpaths의 security 설정
 		http.authorizeRequests()
+				// Local css 파일로 로그인 css 지정하고 싶을 경우 : DemoAppConfig도 수정이 되어야 함
+		 		//.antMatchers("/css/**").permitAll()
 				.anyRequest().authenticated() //해당 앱으로의 어떤 리퀘스트든 authenticated 되어야 함
 			.and()
 			.formLogin()
