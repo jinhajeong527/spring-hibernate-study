@@ -9,7 +9,8 @@ public class LoginController {
 	@GetMapping("/showMyLoginPage")
 	public String showMyLoginPage() {
 		
-		return "plain-login"; //뷰 이름
+		//return "plain-login"; //뷰 이름
+		return "manual-token-login";
 		
 	}
 }

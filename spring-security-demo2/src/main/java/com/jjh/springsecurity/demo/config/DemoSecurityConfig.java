@@ -18,8 +18,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		//유저의 인메모리 인증(authentication) 추가하기
 		
 		UserBuilder users = User.withDefaultPasswordEncoder();
+	
 		auth.inMemoryAuthentication()
-			.withUser(users.username("jinha").password("test123").roles("EMPLOYEE"))
+			.withUser(users.username("jinha").password("test123").roles("EMPLOYEE","MANAGER","ADMIN"))
 			.withUser(users.username("sooyeon").password("test123").roles("MANAGER"))
 			.withUser(users.username("yerin").password("test123").roles("ADMIN"));
 	}
