@@ -48,7 +48,7 @@ public class AddCoursesToOneStudentDemo {
 			List<Course> courses = session.createQuery("select c from " + Course.class.getName()+ " c").getResultList();
 			for(int i =0; i<courses.size(); i++) {
 				if(!courseMap.containsKey(courses.get(i).getId())) { //듣고 있지 않는 수업이라면
-					courses.get(i).AddStudent(theStudent); //1번 학생 추가한다.
+					courses.get(i).addStudent(theStudent); //1번 학생 추가한다.
 				}
 			}
 			
@@ -57,7 +57,6 @@ public class AddCoursesToOneStudentDemo {
 			
 			//트랜잭션 커밋하기
 			session.getTransaction().commit();
-			
 			
 		}
 		finally {

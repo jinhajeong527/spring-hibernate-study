@@ -16,7 +16,7 @@ import com.jjh.springboot.cruddemo.entity.Employee;
 public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 	
 	//define field for entitymanager
-	private EntityManager entityManager;
+	private EntityManager entityManager; //Interface used to interact with the persistence context. 
 	
 	//set up constructor injection
 	@Autowired

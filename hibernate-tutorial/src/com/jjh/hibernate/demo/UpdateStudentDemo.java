@@ -45,7 +45,7 @@ public class UpdateStudentDemo {
 			
 			//모든 학생의 Last name 업데이트 하기
 			session.createQuery("update Student set email='foo@gmail.com'")
-				.executeUpdate();
+					.executeUpdate();
 			
 			//트랜잭션 커밋하기 
 			session.getTransaction().commit();

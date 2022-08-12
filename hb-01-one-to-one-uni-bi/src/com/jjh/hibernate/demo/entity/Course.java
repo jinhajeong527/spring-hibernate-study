@@ -32,7 +32,7 @@ public class Course {
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, 
 						  CascadeType.MERGE, CascadeType.REFRESH})
-	@JoinColumn(name="instructor_id")//Course 테이블에 있는 컬럼이다.
+	@JoinColumn(name="instructor_id")//course 테이블에 있는 컬럼
 	private Instructor instructor;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -94,11 +94,12 @@ public class Course {
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
-	//add a student to a course
-	public void AddStudent(Student theStudent) {
+	//Course에 Student 추가시킨다.
+	public void addStudent(Student theStudent) {
 		if(students == null) {
 			students = new ArrayList<Student>();
 		}
+		
 		students.add(theStudent);
 	}
 

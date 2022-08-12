@@ -1,6 +1,5 @@
 package com.jjh.hibernate.demo.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,10 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import com.jjh.hibernate.demo.DateUtils;
 
 @Entity
 @Table(name="student")//클래스를 테이블과 맵핑함

@@ -57,8 +57,6 @@ public class ReadStudentDemo {
 				System.out.println(student);
 			}
 			
-			
-			
 			//트랜잭션 커밋하기
 			session.getTransaction().commit();
 			

@@ -32,21 +32,22 @@ public class CreateCourseAndStudentsDemo {
 		try {
 			// 트랜잭션 시작
 			session.beginTransaction();
-			// 학생 등록시킬 코스 불러오기
-			int courseId = 10;
+			
+			// 학생 등록시킬 코스 불러오기: Practical Use Of Spring Data JPA
+			int courseId = 20;
 			Course theCourse = session.get(Course.class, courseId);
 			
 			// 학생 생성하기
-			Student student1 = new Student("Jinha","Jeong","jhJeong@luv2code.com");
-			Student student2 = new Student("Yerin","Lee","yrLee@luv2code.com");
-			Student student3 = new Student("Sooyeon","Yoon","syYoon@luv2code.com");
+			Student student1 = new Student("Jihoon","Jeong","jhJeong@luv2code.com");
+			Student student2 = new Student("Yedam","Lee","yedamLee@vtw.co.kr");
+			Student student3 = new Student("Seoyeon","Yoon","seonyeon@luv2code.com");
 			
 			//course에 학생 추가하기
-			theCourse.AddStudent(student1);
-			theCourse.AddStudent(student2);
-			theCourse.AddStudent(student3);
+			theCourse.addStudent(student1);
+			theCourse.addStudent(student2);
+			theCourse.addStudent(student3);
 			
-			//student save 하기.. remove 제외하고 cascading 가능하다.
+			//student 저장 하기
 			session.save(student1);
 			session.save(student2);
 			session.save(student3);

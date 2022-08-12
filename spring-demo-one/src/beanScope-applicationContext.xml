@@ -33,6 +33,14 @@
 		  <!-- 생성자를 통한 의존성 주입 설정 -->
 		  <constructor-arg ref="myFortuneService" /><!-- 의존성 주입할 bean의 id를 적어준다. -->
 	</bean>
+	<bean id="pilatesCoach"
+		  class="com.jjh.springdemo.PilatesCoach"
+		  scope="singleton"
+		  init-method="startTheLesson"
+		  destroy-method="finishTheLesson">
+		  <!-- setter를 통한 의존성 주입 설정 -->
+		  <property name="fortuneService" ref="myGreatFortuneService" />
+	</bean>
 	
 	
     

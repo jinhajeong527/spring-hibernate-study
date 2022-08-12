@@ -10,6 +10,7 @@ import com.jjh.hibernate.demo.entity.Course;
 import com.jjh.hibernate.demo.entity.Instructor;
 import com.jjh.hibernate.demo.entity.InstructorDetail;
 import com.jjh.hibernate.demo.entity.Review;
+import com.jjh.hibernate.demo.entity.Student;
 
 public class GetCourseAndReviewsDemo {
 	
@@ -22,6 +23,7 @@ public class GetCourseAndReviewsDemo {
 								.addAnnotatedClass(InstructorDetail.class)
 								.addAnnotatedClass(Course.class)
 								.addAnnotatedClass(Review.class)
+								.addAnnotatedClass(Student.class)
 								.buildSessionFactory();
 		
 		//session 만들기
@@ -33,7 +35,7 @@ public class GetCourseAndReviewsDemo {
 			session.beginTransaction();
 			
 			//get the course
-			int courseId = 14;
+			int courseId = 10;
 			Course tempCourse = session.get(Course.class, courseId);
 			
 			System.out.println("강사 정보:  "+tempCourse.getInstructor());

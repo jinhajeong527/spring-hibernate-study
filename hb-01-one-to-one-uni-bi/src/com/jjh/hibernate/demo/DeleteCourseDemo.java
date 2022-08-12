@@ -32,7 +32,6 @@ public class DeleteCourseDemo {
 			//db에서 Course 얻어오기
 			int courseId = 13;
 			Course theCourse = session.get(Course.class, courseId);
-			
 			//Course 지우기
 			session.delete(theCourse);
 			
