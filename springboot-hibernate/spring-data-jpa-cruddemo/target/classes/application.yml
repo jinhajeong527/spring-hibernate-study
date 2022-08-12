@@ -1,0 +1,8 @@
+#
+# JDBC properties. Spring은 자동으로 DataSource, EntityManager를 위한 빈들을 생성한다.
+#
+spring:
+ datasource:
+  url: jdbc:mysql://localhost:3306/employee_directory?useSSL=false&serverTImezone=UTC
+  username: hbstudent
+  password: hbstudent
